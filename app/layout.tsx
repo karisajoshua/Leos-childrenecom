@@ -1,4 +1,3 @@
-import type { ReactNode } from 'react';
-import './globals.css';
-export const metadata = { title: "Leo's | Children's Fashion", description: 'Clothes and shoes for ages 0–14 in Canada and the US.' };
-export default function RootLayout({ children }: { children: ReactNode }) { return <html lang="en"><body>{children}</body></html>; }
+import type {ReactNode} from 'react';import './globals.css';import Header from '@/components/Header';import {CartProvider} from '@/components/CartProvider';
+export const metadata={title:"Leo's | Little Styles. Big Adventures.",description:"Discover children's clothes and shoes for ages 0–14 across Canada and the United States."};
+export default function RootLayout({children}:{children:ReactNode}){return <html lang="en"><body><CartProvider><Header/>{children}<footer className="mt-20 border-t bg-white px-5 py-10 text-center text-sm text-slate-500">© {new Date().getFullYear()} Leo's · Little Styles. Big Adventures.</footer></CartProvider></body></html>}
