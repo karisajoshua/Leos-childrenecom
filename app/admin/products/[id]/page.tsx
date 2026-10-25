@@ -1,5 +1,5 @@
-import ProductPhotos from '@/components/admin/ProductPhotos';
 'use client';
+import ProductPhotos from '@/components/admin/ProductPhotos';
 import {useEffect,useState,type FormEvent} from 'react';import {useParams} from 'next/navigation';import Link from 'next/link';import {browserSupabase} from '@/lib/supabase-browser';
 type Variant={id:string;sku:string;size:string|null;color:string|null;price_cents:number;stock_quantity:number;active:boolean};
 export default function VariantsAdmin(){const {id}=useParams<{id:string}>();const [allowed,setAllowed]=useState(false),[loading,setLoading]=useState(true),[name,setName]=useState(''),[variants,setVariants]=useState<Variant[]>([]),[sku,setSku]=useState(''),[size,setSize]=useState(''),[color,setColor]=useState(''),[price,setPrice]=useState(''),[stock,setStock]=useState(0),[message,setMessage]=useState('');const db=browserSupabase();async function refresh(){const [{data:p},{data:v}]=await Promise.all([db.from('products').select('name').eq('id',id).maybeSingle(),db.from('product_variants').select('id,sku,size,color,price_cents,stock_quantity,active').eq('product_id',id).order('sku')]);setName(p?.name||'Product');setVariants(v||[])}
